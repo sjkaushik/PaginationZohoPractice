@@ -15,7 +15,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -101,10 +100,12 @@ public class MainActivity extends AppCompatActivity implements PaginationAdapter
 
         /* First API CALL*/
 
-        if (isNetworkConnected())
+        loadFirstPage();
+
+        /*if (isNetworkConnected())
             loadFirstPage();
         else
-            showErrorView();
+            showErrorView();*/
 
         btnRetry.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements PaginationAdapter
     private void loadFirstPage() {
         studentDetailTask = new StudentDetailTask(this, this);
         studentDetailTask.loadFirstPage(currentPage);
-        Toast.makeText(this, "C P: " + currentPage, Toast.LENGTH_SHORT).show();
+
     }
 
     @Override
