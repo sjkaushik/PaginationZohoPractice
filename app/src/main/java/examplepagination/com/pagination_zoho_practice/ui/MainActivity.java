@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -99,6 +100,7 @@ public class MainActivity extends AppCompatActivity implements PaginationAdapter
         studentViewModel = ViewModelProviders.of(this).get(StudentViewModel.class);
 
         /* First API CALL*/
+        Log.d(TAG, "onCreate: ");
         loadFirstPage();
 
     }
