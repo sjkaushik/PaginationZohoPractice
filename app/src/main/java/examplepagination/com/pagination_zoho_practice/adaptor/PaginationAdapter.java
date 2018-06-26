@@ -73,14 +73,14 @@ public class PaginationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         switch (getItemViewType(position)) {
 
             case ITEM:
-                final StudentVH movieVH = (StudentVH) holder;
+                final StudentVH studentVH = (StudentVH) holder;
 
-                movieVH.firstName.setText(result.getFirst_name());
-                movieVH.lastName.setText(result.getLast_name());
+                studentVH.firstName.setText(result.getFirst_name());
+                studentVH.lastName.setText(result.getLast_name());
 
                 Glide.with(context)
                         .load(result.getAvatar())
-                        .into(movieVH.mPosterImg);
+                        .into(studentVH.mPosterImg);
                 break;
 
             case LOADING:

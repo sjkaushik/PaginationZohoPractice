@@ -15,7 +15,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -100,30 +99,14 @@ public class MainActivity extends AppCompatActivity implements PaginationAdapter
         studentViewModel = ViewModelProviders.of(this).get(StudentViewModel.class);
 
         /* First API CALL*/
-
-        if (isNetworkConnected())
-            loadFirstPage();
-        else
-            showErrorView();
-
-        btnRetry.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if (isNetworkConnected()) {
-                    hideErrorView();
-                    loadFirstPage();
-                } else
-                    showErrorView();
-            }
-        });
+        loadFirstPage();
 
     }
 
     private void loadFirstPage() {
         studentDetailTask = new StudentDetailTask(this, this);
         studentDetailTask.loadFirstPage(currentPage);
-        Toast.makeText(this, "C P: " + currentPage, Toast.LENGTH_SHORT).show();
+
     }
 
     @Override
@@ -150,23 +133,6 @@ public class MainActivity extends AppCompatActivity implements PaginationAdapter
         return errorMsg;
     }
 
-    private void showErrorView() {
-
-        if (errorLayout.getVisibility() == View.GONE) {
-            errorLayout.setVisibility(View.VISIBLE);
-            progressBar.setVisibility(View.GONE);
-
-            // txtError.setText(fetchErrorMessage(throwable));
-        }
-    }
-
-
-    private void hideErrorView() {
-        if (errorLayout.getVisibility() == View.VISIBLE) {
-            errorLayout.setVisibility(View.GONE);
-            progressBar.setVisibility(View.VISIBLE);
-        }
-    }
 
     @Override
     public void onSuccessFirst(List<StudentDetails.DataBean> results) {
@@ -221,9 +187,7 @@ public class MainActivity extends AppCompatActivity implements PaginationAdapter
         studentViewModel.getAllDetails().observe(MainActivity.this, new Observer<List<Result>>() {
             @Override
             public void onChanged(@Nullable final List<Result> results) {
-
                 adapter.addAll(results);
-
             }
         });
 
